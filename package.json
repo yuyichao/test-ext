@@ -1,0 +1,77 @@
+{
+    "name": "test-ext",
+    "displayName": "test_ext",
+    "description": "",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.62.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onStartupFinished"
+    ],
+    "main": "./extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "test-ext.start",
+                "icon": "$(debug-start)",
+                "title": "Start"
+            }, {
+                "command": "test-ext.pause",
+                "icon": "$(debug-pause)",
+                "title": "Pause"
+            }
+        ],
+        "menus": {
+            "editor/title": [
+                {
+                    "command": "test-ext.pause",
+                    "when": "test-ext.running",
+                    "group": "navigation@1"
+                },
+                {
+                    "command": "test-ext.start",
+                    "when": "!test-ext.running",
+                    "group": "navigation@2"
+                }
+            ],
+            "view/item/context": [
+                {
+                    "command": "test-ext.pause",
+                    "when": "view == test-ext-view && test-ext.running",
+                    "group": "inline"
+                },
+                {
+                    "command": "test-ext.start",
+                    "when": "view == test-ext-view && !test-ext.running",
+                    "group": "inline"
+                }
+            ]
+        },
+        "views": {
+            "explorer": [
+                {
+                    "id": "test-ext-view",
+                    "name": "Test View",
+                    "icon": "$(files)"
+                }
+            ]
+        }
+    },
+    "scripts": {
+    },
+    "devDependencies": {
+        "@types/vscode": "^1.62.0",
+        "@types/glob": "^7.1.4",
+        "@types/mocha": "^9.0.0",
+        "@types/node": "14.x",
+        "eslint": "^8.1.0",
+        "glob": "^7.1.7",
+        "mocha": "^9.1.3",
+        "typescript": "^4.4.4",
+        "@vscode/test-electron": "^1.6.2"
+    }
+}
